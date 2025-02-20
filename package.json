@@ -1,0 +1,53 @@
+{
+  "name": "UnfreeHex",
+  "displayName": "UnfreeHex",
+  "description": "MIPS Assembly Helper with Snippets and IntelliSense",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Snippets"
+  ],
+  "icon": "🔥",
+  "activationEvents": [
+    "onLanguage:mips"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "mips",
+        "aliases": ["MIPS Assembly", "mips"],
+        "extensions": [".s",".asm"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "mips",
+        "path": "./snippets/mips.json",
+        "suppressWarnings": true
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node .vscode-test.mjs"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3",
+    "@vscode/test-electron": "^2.3.8"
+  }
+}

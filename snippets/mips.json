@@ -1,0 +1,677 @@
+{
+  "Text Segment": {
+    "prefix": ".text",
+    "body": ".text",
+    "description": "Text segment directive - instructions following this directive are placed in the text segment of memory"
+  },
+  "Program Start": {
+    "prefix": "main",
+    "body": "main:",
+    "description": "Program Header"
+  },
+  "Data Segment": {
+    "prefix": ".data",
+    "body": ".data",
+    "description": "Data segment directive - data following this directive is placed in the data segment of memory"
+  },
+  "Kernel Text Segment": {
+    "prefix": ".ktext",
+    "body": ".ktext ${1:0x80000180}",
+    "description": "Kernel text segment directive - for exception/interrupt handling code"
+  },
+  "Kernel Data Segment": {
+    "prefix": ".kdata",
+    "body": ".kdata",
+    "description": "Kernel data segment directive - for data used by exception/interrupt handlers"
+  },
+  "Align": {
+    "prefix": ".align",
+    "body": ".align ${1:2}",
+    "description": "Align the next data item on a 2^N byte boundary"
+  },
+  "ASCII String": {
+    "prefix": ".ascii",
+    "body": ".ascii \"${1:string}\"",
+    "description": "Store an ASCII string in memory"
+  },
+  "ASCII String with Null": {
+    "prefix": ".asciiz",
+    "body": ".asciiz \"${1:string}\"",
+    "description": "Store a null-terminated ASCII string in memory"
+  },
+  "Reserve Space": {
+    "prefix": ".space",
+    "body": ".space ${1:n}",
+    "description": "Reserve n bytes of space in memory"
+  },
+  "Byte Values": {
+    "prefix": ".byte",
+    "body": ".byte ${1:val1}${2:, val2}${3:, val3}",
+    "description": "Store 8-bit values in memory"
+  },
+  "Halfword Values": {
+    "prefix": ".half",
+    "body": ".half ${1:val1}${2:, val2}${3:, val3}",
+    "description": "Store 16-bit values in memory"
+  },
+  "Word Values": {
+    "prefix": ".word",
+    "body": ".word ${1:val1}${2:, val2}${3:, val3}",
+    "description": "Store 32-bit values in memory"
+  },
+  "Float Values": {
+    "prefix": ".float",
+    "body": ".float ${1:val1}${2:, val2}${3:, val3}",
+    "description": "Store single-precision floating point values in memory"
+  },
+  "Double Values": {
+    "prefix": ".double",
+    "body": ".double ${1:val1}${2:, val2}${3:, val3}",
+    "description": "Store double-precision floating point values in memory"
+  },
+  "Global Label": {
+    "prefix": ".globl",
+    "body": ".globl ${1:label}",
+    "description": "Declare a label as global, making it accessible to other files"
+  },
+  "Add": {
+    "prefix": "add",
+    "body": "add ${1:$rd}, ${2:$rs}, ${3:$rt}",
+    "description": "Add two registers and store the result in a register (with overflow)"
+  },
+  "Add Immediate": {
+    "prefix": "addi",
+    "body": "addi ${1:$rt}, ${2:$rs}, ${3:immediate}",
+    "description": "Add immediate value to register (with overflow)"
+  },
+  "Add Unsigned": {
+    "prefix": "addu",
+    "body": "addu ${1:$rd}, ${2:$rs}, ${3:$rt}",
+    "description": "Add two registers and store the result in a register (no overflow)"
+  },
+  "Add Immediate Unsigned": {
+    "prefix": "addiu",
+    "body": "addiu ${1:$rt}, ${2:$rs}, ${3:immediate}",
+    "description": "Add immediate value to register (no overflow)"
+  },
+  "Subtract": {
+    "prefix": "sub",
+    "body": "sub ${1:$rd}, ${2:$rs}, ${3:$rt}",
+    "description": "Subtract two registers and store the result in a register (with overflow)"
+  },
+  "Subtract Unsigned": {
+    "prefix": "subu",
+    "body": "subu ${1:$rd}, ${2:$rs}, ${3:$rt}",
+    "description": "Subtract two registers and store the result in a register (no overflow)"
+  },
+  "Multiply": {
+    "prefix": "mul",
+    "body": "mul ${1:$rd}, ${2:$rs}, ${3:$rt}",
+    "description": "Multiply two registers and store the result in a register (32-bit result)"
+  },
+  "Multiply to Hi/Lo": {
+    "prefix": "mult",
+    "body": "mult ${1:$rs}, ${2:$rt}",
+    "description": "Multiply two registers (signed, 64-bit result in Hi/Lo registers)"
+  },
+  "Multiply to Hi/Lo Unsigned": {
+    "prefix": "multu",
+    "body": "multu ${1:$rs}, ${2:$rt}",
+    "description": "Multiply two registers (unsigned, 64-bit result in Hi/Lo registers)"
+  },
+  "Multiply Add to Hi/Lo": {
+    "prefix": "madd",
+    "body": "madd ${1:$rs}, ${2:$rt}",
+    "description": "Multiply two registers and add to Hi/Lo registers (signed)"
+  },
+  "Multiply Add to Hi/Lo Unsigned": {
+    "prefix": "maddu",
+    "body": "maddu ${1:$rs}, ${2:$rt}",
+    "description": "Multiply two registers and add to Hi/Lo registers (unsigned)"
+  },
+  "Multiply Subtract from Hi/Lo": {
+    "prefix": "msub",
+    "body": "msub ${1:$rs}, ${2:$rt}",
+    "description": "Multiply two registers and subtract from Hi/Lo registers (signed)"
+  },
+  "Multiply Subtract from Hi/Lo Unsigned": {
+    "prefix": "msubu",
+    "body": "msubu ${1:$rs}, ${2:$rt}",
+    "description": "Multiply two registers and subtract from Hi/Lo registers (unsigned)"
+  },
+  "Divide": {
+    "prefix": "div",
+    "body": "div ${1:$rs}, ${2:$rt}",
+    "description": "Divide rs by rt (signed, quotient to Lo, remainder to Hi)"
+  },
+  "Divide with Result": {
+    "prefix": "div.r",
+    "body": "div ${1:$rd}, ${2:$rs}, ${3:$rt}",
+    "description": "Divide rs by rt and store quotient in rd (signed)"
+  },
+  "Divide Unsigned": {
+    "prefix": "divu",
+    "body": "divu ${1:$rs}, ${2:$rt}",
+    "description": "Divide rs by rt (unsigned, quotient to Lo, remainder to Hi)"
+  },
+  "Divide Unsigned with Result": {
+    "prefix": "divu.r",
+    "body": "divu ${1:$rd}, ${2:$rs}, ${3:$rt}",
+    "description": "Divide rs by rt and store quotient in rd (unsigned)"
+  },
+  "Remainder": {
+    "prefix": "rem",
+    "body": "rem ${1:$rd}, ${2:$rs}, ${3:$rt}",
+    "description": "Compute remainder of rs divided by rt (signed)"
+  },
+  "Remainder Unsigned": {
+    "prefix": "remu",
+    "body": "remu ${1:$rd}, ${2:$rs}, ${3:$rt}",
+    "description": "Compute remainder of rs divided by rt (unsigned)"
+  },
+  "Count Leading Ones": {
+    "prefix": "clo",
+    "body": "clo ${1:$rd}, ${2:$rs}",
+    "description": "Count number of leading ones in rs"
+  },
+  "Count Leading Zeros": {
+    "prefix": "clz",
+    "body": "clz ${1:$rd}, ${2:$rs}",
+    "description": "Count number of leading zeros in rs"
+  },
+  "Sign-Extend Byte": {
+    "prefix": "seb",
+    "body": "seb ${1:$rd}, ${2:$rt}",
+    "description": "Sign-extend byte (8 bits) to word"
+  },
+  "Sign-Extend Halfword": {
+    "prefix": "seh",
+    "body": "seh ${1:$rd}, ${2:$rt}",
+    "description": "Sign-extend halfword (16 bits) to word"
+  },
+  "Set Equal": {
+    "prefix": "seq",
+    "body": "seq ${1:$rd}, ${2:$rs}, ${3:$rt}",
+    "description": "Set rd to 1 if rs equals rt, 0 otherwise"
+  },
+  "Set Not Equal": {
+    "prefix": "sne",
+    "body": "sne ${1:$rd}, ${2:$rs}, ${3:$rt}",
+    "description": "Set rd to 1 if rs not equal to rt, 0 otherwise"
+  },
+  "Set Less Than or Equal": {
+    "prefix": "sle",
+    "body": "sle ${1:$rd}, ${2:$rs}, ${3:$rt}",
+    "description": "Set rd to 1 if rs less than or equal to rt (signed), 0 otherwise"
+  },
+  "Set Less Than or Equal Unsigned": {
+    "prefix": "sleu",
+    "body": "sleu ${1:$rd}, ${2:$rs}, ${3:$rt}",
+    "description": "Set rd to 1 if rs less than or equal to rt (unsigned), 0 otherwise"
+  },
+  "Set Less Than": {
+    "prefix": "slt",
+    "body": "slt ${1:$rd}, ${2:$rs}, ${3:$rt}",
+    "description": "Set rd to 1 if rs less than rt (signed), 0 otherwise"
+  },
+  "Set Less Than Unsigned": {
+    "prefix": "sltu",
+    "body": "sltu ${1:$rd}, ${2:$rs}, ${3:$rt}",
+    "description": "Set rd to 1 if rs less than rt (unsigned), 0 otherwise"
+  },
+  "Set Greater Than": {
+    "prefix": "sgt",
+    "body": "sgt ${1:$rd}, ${2:$rs}, ${3:$rt}",
+    "description": "Set rd to 1 if rs greater than rt (signed), 0 otherwise"
+  },
+  "Set Greater Than Unsigned": {
+    "prefix": "sgtu",
+    "body": "sgtu ${1:$rd}, ${2:$rs}, ${3:$rt}",
+    "description": "Set rd to 1 if rs greater than rt (unsigned), 0 otherwise"
+  },
+  "Set Greater Than or Equal": {
+    "prefix": "sge",
+    "body": "sge ${1:$rd}, ${2:$rs}, ${3:$rt}",
+    "description": "Set rd to 1 if rs greater than or equal to rt (signed), 0 otherwise"
+  },
+  "Set Greater Than or Equal Unsigned": {
+    "prefix": "sgeu",
+    "body": "sgeu ${1:$rd}, ${2:$rs}, ${3:$rt}",
+    "description": "Set rd to 1 if rs greater than or equal to rt (unsigned), 0 otherwise"
+  },
+  "Set Less Than Immediate": {
+    "prefix": "slti",
+    "body": "slti ${1:$rt}, ${2:$rs}, ${3:immediate}",
+    "description": "Set rt to 1 if rs less than immediate (signed), 0 otherwise"
+  },
+  "Set Less Than Immediate Unsigned": {
+    "prefix": "sltiu",
+    "body": "sltiu ${1:$rt}, ${2:$rs}, ${3:immediate}",
+    "description": "Set rt to 1 if rs less than immediate (unsigned), 0 otherwise"
+  },
+  "Absolute Value": {
+    "prefix": "abs",
+    "body": "abs ${1:$rd}, ${2:$rs}",
+    "description": "Compute absolute value of rs"
+  },
+  "Negate": {
+    "prefix": "neg",
+    "body": "neg ${1:$rd}, ${2:$rs}",
+    "description": "Negate rs (with overflow check)"
+  },
+  "Negate Unsigned": {
+    "prefix": "negu",
+    "body": "negu ${1:$rd}, ${2:$rs}",
+    "description": "Negate rs (no overflow check)"
+  },
+  "AND": {
+    "prefix": "and",
+    "body": "and ${1:$rd}, ${2:$rs}, ${3:$rt}",
+    "description": "Bitwise AND of rs and rt"
+  },
+  "AND Immediate": {
+    "prefix": "andi",
+    "body": "andi ${1:$rt}, ${2:$rs}, ${3:immediate}",
+    "description": "Bitwise AND of rs and immediate value"
+  },
+  "OR": {
+    "prefix": "or",
+    "body": "or ${1:$rd}, ${2:$rs}, ${3:$rt}",
+    "description": "Bitwise OR of rs and rt"
+  },
+  "OR Immediate": {
+    "prefix": "ori",
+    "body": "ori ${1:$rt}, ${2:$rs}, ${3:immediate}",
+    "description": "Bitwise OR of rs and immediate value"
+  },
+  "NOR": {
+    "prefix": "nor",
+    "body": "nor ${1:$rd}, ${2:$rs}, ${3:$rt}",
+    "description": "Bitwise NOR of rs and rt"
+  },
+  "XOR": {
+    "prefix": "xor",
+    "body": "xor ${1:$rd}, ${2:$rs}, ${3:$rt}",
+    "description": "Bitwise XOR of rs and rt"
+  },
+  "XOR Immediate": {
+    "prefix": "xori",
+    "body": "xori ${1:$rt}, ${2:$rs}, ${3:immediate}",
+    "description": "Bitwise XOR of rs and immediate value"
+  },
+  "NOT": {
+    "prefix": "not",
+    "body": "not ${1:$rd}, ${2:$rs}",
+    "description": "Bitwise NOT of rs"
+  },
+  "Rotate Left": {
+    "prefix": "rol",
+    "body": "rol ${1:$rd}, ${2:$rs}, ${3:$rt}",
+    "description": "Rotate rs left by rt bits"
+  },
+  "Rotate Right": {
+    "prefix": "ror",
+    "body": "ror ${1:$rd}, ${2:$rs}, ${3:$rt}",
+    "description": "Rotate rs right by rt bits"
+  },
+  "Rotate Right Fixed": {
+    "prefix": "rotr",
+    "body": "rotr ${1:$rd}, ${2:$rt}, ${3:sa}",
+    "description": "Rotate rt right by sa bits (immediate shift amount)"
+  },
+  "Rotate Right Variable": {
+    "prefix": "rotrv",
+    "body": "rotrv ${1:$rd}, ${2:$rt}, ${3:$rs}",
+    "description": "Rotate rt right by rs bits (variable shift amount)"
+  },
+  "Shift Left Logical": {
+    "prefix": "sll",
+    "body": "sll ${1:$rd}, ${2:$rt}, ${3:sa}",
+    "description": "Shift rt left by sa bits (immediate shift amount)"
+  },
+  "Shift Left Logical Variable": {
+    "prefix": "sllv",
+    "body": "sllv ${1:$rd}, ${2:$rt}, ${3:$rs}",
+    "description": "Shift rt left by rs bits (variable shift amount)"
+  },
+  "Shift Right Arithmetic": {
+    "prefix": "sra",
+    "body": "sra ${1:$rd}, ${2:$rt}, ${3:sa}",
+    "description": "Shift rt right arithmetic by sa bits (sign-extended, immediate shift amount)"
+  },
+  "Shift Right Arithmetic Variable": {
+    "prefix": "srav",
+    "body": "srav ${1:$rd}, ${2:$rt}, ${3:$rs}",
+    "description": "Shift rt right arithmetic by rs bits (sign-extended, variable shift amount)"
+  },
+  "Shift Right Logical": {
+    "prefix": "srl",
+    "body": "srl ${1:$rd}, ${2:$rt}, ${3:sa}",
+    "description": "Shift rt right logical by sa bits (zero-extended, immediate shift amount)"
+  },
+  "Shift Right Logical Variable": {
+    "prefix": "srlv",
+    "body": "srlv ${1:$rd}, ${2:$rt}, ${3:$rs}",
+    "description": "Shift rt right logical by rs bits (zero-extended, variable shift amount)"
+  },
+  "Load Immediate": {
+    "prefix": "li",
+    "body": "li ${1:$rt}, ${2:immediate}",
+    "description": "Load immediate value into register"
+  },
+  "Load Address": {
+    "prefix": "la",
+    "body": "la ${1:$rt}, ${2:address}",
+    "description": "Load address into register"
+  },
+  "Load Upper Immediate": {
+    "prefix": "lui",
+    "body": "lui ${1:$rt}, ${2:immediate}",
+    "description": "Load upper 16 bits of immediate into register"
+  },
+  "Load Byte": {
+    "prefix": "lb",
+    "body": "lb ${1:$rt}, ${2:offset}(${3:$base})",
+    "description": "Load byte from memory (sign-extended)"
+  },
+  "Load Byte Unsigned": {
+    "prefix": "lbu",
+    "body": "lbu ${1:$rt}, ${2:offset}(${3:$base})",
+    "description": "Load byte from memory (zero-extended)"
+  },
+  "Load Halfword": {
+    "prefix": "lh",
+    "body": "lh ${1:$rt}, ${2:offset}(${3:$base})",
+    "description": "Load halfword from memory (sign-extended)"
+  },
+  "Load Halfword Unsigned": {
+    "prefix": "lhu",
+    "body": "lhu ${1:$rt}, ${2:offset}(${3:$base})",
+    "description": "Load halfword from memory (zero-extended)"
+  },
+  "Load Word": {
+    "prefix": "lw",
+    "body": "lw ${1:$rt}, ${2:offset}(${3:$base})",
+    "description": "Load word from memory"
+  },
+  "Store Byte": {
+    "prefix": "sb",
+    "body": "sb ${1:$rt}, ${2:offset}(${3:$base})",
+    "description": "Store least significant byte to memory"
+  },
+  "Store Halfword": {
+    "prefix": "sh",
+    "body": "sh ${1:$rt}, ${2:offset}(${3:$base})",
+    "description": "Store least significant halfword to memory"
+  },
+  "Store Word": {
+    "prefix": "sw",
+    "body": "sw ${1:$rt}, ${2:offset}(${3:$base})",
+    "description": "Store word to memory"
+  },
+  "Push Register": {
+    "prefix": "push",
+    "body": "sw ${1:$register}, ($sp)\naddiu $sp, $sp, -4",
+    "description": "Push a register onto the stack"
+  },
+  "Pop Register": {
+    "prefix": "pop",
+    "body": "lw ${1:$register}, 4($sp)\naddiu $sp, $sp, 4",
+    "description": "Pop a register from the stack"
+  },
+  "Begin Function": {
+    "prefix": "begin",
+    "body": "${1:label}:\n\tsw $ra, ($sp)\n\tsw $fp, -4($sp)\n\tmove $fp, $sp\n\taddiu $sp, $sp, -${2:8}",
+    "description": "Function prologue - save registers and set up stack frame"
+  },
+  "End Function": {
+    "prefix": "end",
+    "body": "\tmove $sp, $fp\n\tlw $ra, ($sp)\n\tlw $fp, -4($sp)\n\tjr $ra",
+    "description": "Function epilogue - restore registers and return"
+  },
+  "Move From Hi": {
+    "prefix": "mfhi",
+    "body": "mfhi ${1:$rd}",
+    "description": "Copy Hi register to GPR"
+  },
+  "Move From Lo": {
+    "prefix": "mflo",
+    "body": "mflo ${1:$rd}",
+    "description": "Copy Lo register to GPR"
+  },
+  "Move To Hi": {
+    "prefix": "mthi",
+    "body": "mthi ${1:$rs}",
+    "description": "Copy GPR to Hi register"
+  },
+  "Move To Lo": {
+    "prefix": "mtlo",
+    "body": "mtlo ${1:$rs}",
+    "description": "Copy GPR to Lo register"
+  },
+  "Move": {
+    "prefix": "move",
+    "body": "move ${1:$rd}, ${2:$rs}",
+    "description": "Copy one register to another"
+  },
+  "Move If Zero": {
+    "prefix": "movz",
+    "body": "movz ${1:$rd}, ${2:$rs}, ${3:$rt}",
+    "description": "Move rs to rd if rt is zero"
+  },
+  "Move If Not Zero": {
+    "prefix": "movn",
+    "body": "movn ${1:$rd}, ${2:$rs}, ${3:$rt}",
+    "description": "Move rs to rd if rt is not zero"
+  },
+  "Branch": {
+    "prefix": "b",
+    "body": "b ${1:label}",
+    "description": "Unconditional branch to label"
+  },
+  "Branch If Equal": {
+    "prefix": "beq",
+    "body": "beq ${1:$rs}, ${2:$rt}, ${3:label}",
+    "description": "Branch to label if rs equals rt"
+  },
+  "Branch If Equal Zero": {
+    "prefix": "beqz",
+    "body": "beqz ${1:$rs}, ${2:label}",
+    "description": "Branch to label if rs equals zero"
+  },
+  "Branch If Not Equal": {
+    "prefix": "bne",
+    "body": "bne ${1:$rs}, ${2:$rt}, ${3:label}",
+    "description": "Branch to label if rs not equal to rt"
+  },
+  "Branch If Not Equal Zero": {
+    "prefix": "bnez",
+    "body": "bnez ${1:$rs}, ${2:label}",
+    "description": "Branch to label if rs not equal to zero"
+  },
+  "Branch If Greater Equal": {
+    "prefix": "bge",
+    "body": "bge ${1:$rs}, ${2:$rt}, ${3:label}",
+    "description": "Branch to label if rs greater than or equal to rt (signed)"
+  },
+  "Branch If Greater Equal Zero": {
+    "prefix": "bgez",
+    "body": "bgez ${1:$rs}, ${2:label}",
+    "description": "Branch to label if rs greater than or equal to zero"
+  },
+  "Branch If Greater Equal Unsigned": {
+    "prefix": "bgeu",
+    "body": "bgeu ${1:$rs}, ${2:$rt}, ${3:label}",
+    "description": "Branch to label if rs greater than or equal to rt (unsigned)"
+  },
+  "Branch If Greater Than": {
+    "prefix": "bgt",
+    "body": "bgt ${1:$rs}, ${2:$rt}, ${3:label}",
+    "description": "Branch to label if rs greater than rt (signed)"
+  },
+  "Branch If Greater Than Unsigned": {
+    "prefix": "bgtu",
+    "body": "bgtu ${1:$rs}, ${2:$rt}, ${3:label}",
+    "description": "Branch to label if rs greater than rt (unsigned)"
+  },
+  "Branch If Greater Than Zero": {
+    "prefix": "bgtz",
+    "body": "bgtz ${1:$rs}, ${2:label}",
+    "description": "Branch to label if rs greater than zero"
+  },
+  "Branch If Less Than": {
+    "prefix": "blt",
+    "body": "blt ${1:$rs}, ${2:$rt}, ${3:label}",
+    "description": "Branch to label if rs less than rt (signed)"
+  },
+  "Branch If Less Than Zero": {
+    "prefix": "bltz",
+    "body": "bltz ${1:$rs}, ${2:label}",
+    "description": "Branch to label if rs less than zero"
+  },
+  "Branch If Less Than Unsigned": {
+    "prefix": "bltu",
+    "body": "bltu ${1:$rs}, ${2:$rt}, ${3:label}",
+    "description": "Branch to label if rs less than rt (unsigned)"
+  },
+  "Jump": {
+    "prefix": "j",
+    "body": "j ${1:label}",
+    "description": "Jump to label"
+  },
+  "Jump And Link": {
+    "prefix": "jal",
+    "body": "jal ${1:label}",
+    "description": "Jump to label and save return address in $ra"
+  },
+  "Jump And Link Register (Single)": {
+    "prefix": "jalr",
+    "body": "jalr ${1:$rs}",
+    "description": "Jump to address in rs and save return address in $ra"
+  },
+  "Jump And Link Register (Double)": {
+    "prefix": "jalr.d",
+    "body": "jalr ${1:$rd}, ${2:$rs}",
+    "description": "Jump to address in rs and save return address in rd"
+  },
+  "Jump Register": {
+    "prefix": "jr",
+    "body": "jr ${1:$rs}",
+    "description": "Jump to address in rs"
+  },
+  "System Call": {
+    "prefix": "syscall",
+    "body": "syscall",
+    "description": "System call (service number in $v0)"
+  },
+  "Break": {
+    "prefix": "break",
+    "body": "break ${1:code}",
+    "description": "Break execution (used for debugging)"
+  },
+  "Trap if Equal": {
+    "prefix": "teq",
+    "body": "teq ${1:$rs}, ${2:$rt}",
+    "description": "Trap if rs equals rt"
+  },
+  "Trap if Equal Immediate": {
+    "prefix": "teqi",
+    "body": "teqi ${1:$rs}, ${2:immediate}",
+    "description": "Trap if rs equals immediate value"
+  },
+  "Trap if Not Equal": {
+    "prefix": "tne",
+    "body": "tne ${1:$rs}, ${2:$rt}",
+    "description": "Trap if rs not equal to rt"
+  },
+  "Trap if Not Equal Immediate": {
+    "prefix": "tnei",
+    "body": "tnei ${1:$rs}, ${2:immediate}",
+    "description": "Trap if rs not equal to immediate value"
+  },
+  "Trap if Greater or Equal": {
+    "prefix": "tge",
+    "body": "tge ${1:$rs}, ${2:$rt}",
+    "description": "Trap if rs greater than or equal to rt (signed)"
+  },
+  "Trap if Greater or Equal Unsigned": {
+    "prefix": "tgeu",
+    "body": "tgeu ${1:$rs}, ${2:$rt}",
+    "description": "Trap if rs greater than or equal to rt (unsigned)"
+  },
+  "Trap if Greater or Equal Immediate": {
+    "prefix": "tgei",
+    "body": "tgei ${1:$rs}, ${2:immediate}",
+    "description": "Trap if rs greater than or equal to immediate value (signed)"
+  },
+  "Trap if Greater or Equal Immediate Unsigned": {
+    "prefix": "tgeiu",
+    "body": "tgeiu ${1:$rs}, ${2:immediate}",
+    "description": "Trap if rs greater than or equal to immediate value (unsigned)"
+  },
+  "Trap if Greater Than": {
+    "prefix": "tgt",
+    "body": "tgt ${1:$rs}, ${2:$rt}",
+    "description": "Trap if rs greater than rt (signed)"
+  },
+  "Trap if Greater Than Immediate": {
+    "prefix": "tgti",
+    "body": "tgti ${1:$rs}, ${2:immediate}",
+    "description": "Trap if rs greater than immediate value (signed)"
+  },
+  "Trap if Greater Than Unsigned": {
+    "prefix": "tgtu",
+    "body": "tgtu ${1:$rs}, ${2:$rt}",
+    "description": "Trap if rs greater than rt (unsigned)"
+  },
+  "Trap if Greater Than Immediate Unsigned": {
+    "prefix": "tgtiu",
+    "body": "tgtiu ${1:$rs}, ${2:immediate}",
+    "description": "Trap if rs greater than immediate value (unsigned)"
+  },
+  "Trap if Less Than": {
+    "prefix": "tlt",
+    "body": "tlt ${1:$rs}, ${2:$rt}",
+    "description": "Trap if rs less than rt (signed)"
+  },
+  "Trap if Less Than Unsigned": {
+    "prefix": "tltu",
+    "body": "tltu ${1:$rs}, ${2:$rt}",
+    "description": "Trap if rs less than rt (unsigned)"
+  },
+  "Trap if Less Than Immediate": {
+    "prefix": "tlti",
+    "body": "tlti ${1:$rs}, ${2:immediate}",
+    "description": "Trap if rs less than immediate value (signed)"
+  },
+  "Trap if Less Than Immediate Unsigned": {
+    "prefix": "tltiu",
+    "body": "tltiu ${1:$rs}, ${2:immediate}",
+    "description": "Trap if rs less than immediate value (unsigned)"
+  },
+  "Trap if Less or Equal": {
+    "prefix": "tle",
+    "body": "tle ${1:$rs}, ${2:$rt}",
+    "description": "Trap if rs less than or equal to rt (signed)"
+  },
+  "Trap if Less or Equal Unsigned": {
+    "prefix": "tleu",
+    "body": "tleu ${1:$rs}, ${2:$rt}",
+    "description": "Trap if rs less than or equal to rt (unsigned)"
+  },
+  "Trap if Less or Equal Immediate": {
+    "prefix": "tlei",
+    "body": "tlei ${1:$rs}, ${2:immediate}",
+    "description": "Trap if rs less than or equal to immediate value (signed)"
+  },
+  "Trap if Less or Equal Immediate Unsigned": {
+    "prefix": "tleiu",
+    "body": "tleiu ${1:$rs}, ${2:immediate}",
+    "description": "Trap if rs less than or equal to immediate value (unsigned)"
+  },
+  "No Operation": {
+    "prefix": "nop",
+    "body": "nop",
+    "description": "No operation (does nothing, advances PC)"
+  }
+}
