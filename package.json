@@ -10,7 +10,7 @@
     "Programming Languages",
     "Snippets"
   ],
-  "icon": "🔥",
+  "icon": "anchor.png",
   "activationEvents": [
     "onLanguage:mips"
   ],
