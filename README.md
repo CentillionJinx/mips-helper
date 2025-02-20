@@ -1,71 +1,72 @@
-# mips-helper README
+# HeX: Your MIPS Assembly Companion 🚀
 
-This is the README for your extension "mips-helper". After writing up a brief description, we recommend including the following sections.
+HeX is a VS Code extension designed to make your MIPS assembly programming journey smoother and more enjoyable.  It provides helpful features like hover information for directives and instructions, and intelligent autocompletion for system calls.  Tired of constantly looking up MIPS documentation? HeX has you covered!
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+### 1. Instant MIPS Gratification 🎉
 
-For example if there is an image subfolder under your extension project workspace:
+HeX loves MIPS as much as you do!  When you open a `.s` or `.asm` file, you'll get a friendly reminder:
 
-\!\[feature X\]\(images/feature-x.png\)
+### 2. Hover Documentation 🔍
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+No more flipping through manuals!  Hover over any supported MIPS directive or instruction to see a concise description and a clear example. This feature currently supports a wide range of commonly used directives and instructions, covering data definition, arithmetic operations, logical operations, memory access, control flow, and more.
 
-## Requirements
+**Supported Directives and Instructions (Complete List):**
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+*   `.text`, `.data`, `.ktext`, `.kdata`, `.align`, `.ascii`, `.asciiz`, `.space`, `.byte`, `.half`, `.word`, `.float`, `.double`, `.globl`
+*   `add`, `sub`, `addi`, `addu`, `addiu`, `subu`, `mul`, `mult`, `multu`, `madd`, `maddu`, `msub`, `msubu`, `div`, `divu`, `rem`, `remu`, `clo`, `clz`, `seb`, `seh`, `seq`, `sne`, `sle`, `sleu`, `slt`, `sltu`, `sgt`, `sgtu`, `sge`, `sgeu`, `slti`, `sltiu`
+*    `abs`, `neg`, `negu`
+*   `and`, `andi`, `or`, `ori`, `nor`, `xor`, `xori`, `not`, `rol`, `ror`,`rotr`, `rotrv`, `sll`, `sllv`, `sra`, `srav`, `srl`, `srlv`
+*   `li`, `la`, `lui`, `lb`, `lbu`, `lh`, `lhu`, `lw`, `sb`, `sh`, `sw`, `push`, `pop`
+*    `begin`, `end`
+*   `mfhi`, `mflo`, `mthi`, `mtlo`, `move`, `movz`, `movn`
+*   `b`, `beq`, `beqz`, `bne`, `bnez`, `bge`, `bgez`, `bgeu`, `bgt`, `bgtu`, `bgtz`, `blt`, `bltz`, `bltu`, `j`, `jal`, `jalr`, `jr`
+*   `syscall`, `break`
+* `teq`, `teqi`, `tne`, `tnei`, `tge`, `tgeu`, `tgei`, `tgeiu`, `tgt`, `tgti`, `tgtu`, `tgtiu`,`tlt`, `tltu`, `tlti`, `tltiu`, `tle`, `tleu`, `tlei`, `tleiu`
+*   `nop`
 
-## Extension Settings
+### 3.  SYSCALL Autocompletion ⚡️
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+Writing MIPS system calls just got easier.  When you type `li $v0, ` in a MIPS file, HeX will provide a list of all available syscalls with their corresponding numbers, descriptions, and C equivalents.  Select the one you need, and HeX will automatically insert the correct number and a helpful comment.
 
-For example:
 
-This extension contributes the following settings:
+**Supported Syscalls (Complete List):**
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+| Number | Label            | C Equivalent | Description                                                                                                                         |
+|--------|-------------------|--------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| 1      | `print_int`      | `printf("%d")`   | Print the integer in `$a0` to the console as a signed decimal.                                                                    |
+| 2      | `print_float`    | `printf("%f")`   | Print the float in `$f12` to the console as a `%.8f`.                                                                            |
+| 3      | `print_double`   | `printf("%g")`   | Print the double in `$f12/$f13` to the console as a `%.18g`.                                                                    |
+| 4      | `print_string`   | `printf("%s")`   | Print the nul-terminated array of bytes referenced by `$a0` to the console as an ASCII string.                                  |
+| 5      | `read_int`       | `scanf("%d")`    | Read an integral value from the console, with `atol`'s semantics, into register `$v0`.                                          |
+| 6      | `read_float`     | `scanf("%f")`    | Read a floating-point value from the console, with `atof`'s semantics, into register `$f0`.                                    |
+| 7      | `read_double`    | `scanf("%lf")`   | Read a double-precision floating-point value from the console, with `atof`'s semantics, into registers `$f0/$f1`.              |
+| 8      | `read_string`    | `fgets()`        | Read a string into the provided buffer (referenced by `$a0`); up to `size` (given in `$a1`) bytes are read and nul-terminated. |
+| 9      | `sbrk`           | `malloc()`       | Extend the `.data` segment by adding `$a0` bytes; a primitive useful for, e.g., implementing `malloc`.                             |
+| 10     | `exit`           | `exit(0)`        | The program exits with code 0.                                                                                                    |
+| 11     | `print_character`| `putchar()`      | Print the character in `$a0`, analogous to `putchar`.                                                                              |
+| 12     | `read_character` | `getchar()`      | Read the next character from the console into register `$v0`; analogous to `getchar`.                                               |
+| 13     | `open`           | `open()`         | Open the file specified by name (referenced by `$a0`) with flags (given by `$a1`) and mode (given by `$a2`). Returns file descriptor.|
+| 14     | `read`           | `read()`         | Read `len` bytes (given by `$a2`) into `buffer` (given by `$a1`) from file descriptor `fd` (given in `$a0`).                       |
+| 15     | `write`          | `write()`        | Write `len` bytes (given by `$a2`) from `buffer` (given by `$a1`) to file descriptor `fd` (given in `$a0`).                       |
+| 16     | `close`          | `close()`        | Close the file given by the file descriptor `fd` (given in `$a0`).                                                                  |
+| 17     | `exit2`          | `exit(n)`        | The program exits with code (given in `$a0`).                                                                                       |
 
-## Known Issues
+## Installation
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+1.  Open **Visual Studio Code**.
+2.  Go to the **Extensions** view by clicking on the Extensions icon in the Activity Bar on the side of the window or pressing `Ctrl+Shift+X` (Windows/Linux) or `Cmd+Shift+X` (macOS).
+3.  Search for "**HeX - MIPS Helper**".
+4.  Click **Install**.
+5.  Reload VS Code.
 
-## Release Notes
+##  About the Creator
 
-Users appreciate release notes as you update your extension.
+<img src="https://avatars.githubusercontent.com/u/73017980?v=4&size=64" width="100" alt="Gururam's Avatar">
 
-### 1.0.0
+This extension was created by Gururam K, a passionate programmer who loves low-level systems programming.  You can find more of my work on my website: [gururam.vercel.app](https://gururam.vercel.app)
 
-Initial release of ...
+## Contributing
 
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+Contributions are welcome!  If you have suggestions for improvements, find a bug, or want to add support for more MIPS instructions, please open an issue or submit a pull request on the [GitHub repository]([https://github.com/CentillionJinx/mips-helper]).
