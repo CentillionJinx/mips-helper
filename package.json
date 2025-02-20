@@ -1,5 +1,5 @@
 {
-  "name": "UnfreeHex",
+  "name": "hex",
   "displayName": "UnfreeHex",
   "description": "MIPS Assembly Helper with Snippets and IntelliSense",
   "version": "0.0.1",
@@ -49,5 +49,9 @@
     "eslint": "^8.56.0",
     "typescript": "^5.3.3",
     "@vscode/test-electron": "^2.3.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CentillionJinx/mips-helper.git"
   }
 }
