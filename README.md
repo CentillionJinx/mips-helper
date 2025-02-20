@@ -65,7 +65,7 @@ Writing MIPS system calls just got easier.  When you type `li $v0, ` in a MIPS f
 
 <img src="https://avatars.githubusercontent.com/u/73017980?v=4&size=64" width="100" alt="Gururam's Avatar">
 
-This extension was created by Gururam K, a passionate programmer who loves low-level systems programming.  You can find more of my work on my website: [gururam.vercel.app](https://gururam.vercel.app)
+This extension was created by Gururam. You can find more of my work on my website: [gururam.vercel.app](https://gururam.vercel.app)
 
 ## Contributing
 
