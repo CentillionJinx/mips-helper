@@ -398,12 +398,12 @@ e:      .double 2.71828      # Euler's number`,
         begin: {
           description: "Function prologue",
           example:
-            "begin_func:\n  sw $ra, ($sp)\n  sw $fp, -4($sp)\n  move $fp, $sp\n  addiu $sp, $sp, -8",
+            "begin_func:\\n  sw $ra, ($sp)\\n  sw $fp, -4($sp)\\n  move $fp, $sp\\n  addiu $sp, $sp, -8",
         },
         end: {
           description: "Function epilogue",
           example:
-            "end_func:\n  move $sp, $fp\n  lw $ra, ($sp)\n  lw $fp, -4($sp)\n  jr $ra",
+            "end_func:\\n  move $sp, $fp\\n  lw $ra, ($sp)\\n  lw $fp, -4($sp)\\n  jr $ra",
         },
         mfhi: {
           description: "Move from HI register",
@@ -648,8 +648,7 @@ e:      .double 2.71828      # Euler's number`,
       ) {
         const lineText = document.lineAt(position.line).text;
         const linePrefix = lineText.substring(0, position.character);
-        if (!linePrefix.endsWith("$v0, ")) {
-          return undefined;
+        if (linePrefix !== "$v0, ") {
         }
 
         const syscalls = [

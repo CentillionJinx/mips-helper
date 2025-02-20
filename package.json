@@ -2,7 +2,7 @@
   "name": "mips-helper",
   "displayName": "MIPS Helper",
   "description": "MIPS Assembly Helper with Snippets and IntelliSense",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "Gururam",
   "engines": {
     "vscode": "^1.85.0"
